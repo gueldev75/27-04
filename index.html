@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <!-- Garante que a viewport seja adequada a dispositivos móveis -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slideshow Musical</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      /* Removido overflow: hidden para permitir rolagem em telas pequenas */
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    /* Tela de início cobrindo toda a tela */
+    #start-screen {
+      position: fixed;
+      inset: 0; /* top: 0; right: 0; bottom: 0; left: 0; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      z-index: 10;
+    }
+    #start-btn {
+      font-size: 24px;
+      padding: 15px 30px;
+      cursor: pointer;
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      transition: 0.3s;
+    }
+    #start-btn:hover {
+      background-color: #ff1a1a;
+    }
+
+    /* Container principal adaptável em altura */
+    #slideshow-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* ocupa no mínimo toda a altura da tela */
+      padding: 20px;     /* espaçamento interno para telas menores */
+      box-sizing: border-box;
+    }
+
+    #song-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    #cover {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+      margin-bottom: 20px;
+    }
+
+    /* Player de áudio com estilo nativo (preto e branco) */
+    audio {
+      margin-bottom: 30px;
+      background-color: black;
+      border: none;
+      outline: none;
+      filter: grayscale(100%);
+    }
+    audio::-webkit-media-controls-panel {
+      background-color: black;
+    }
+    audio::-webkit-media-controls-play-button,
+    audio::-webkit-media-controls-volume-slider,
+    audio::-webkit-media-controls-mute-button,
+    audio::-webkit-media-controls-timeline,
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display {
+      filter: invert(1);
+    }
+
+    /* Slideshow mais flexível */
+    #slideshow {
+      position: relative;
+      /* Ocupa até 90% da largura da tela, limitado a 500px */
+      width: 90vw;
+      max-width: 500px;
+
+      /* Mantém uma proporção parecida com 500x700 (5:7) */
+      aspect-ratio: 5 / 7;
+
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+      margin: 0 auto;  /* centraliza no container */
+      overflow: hidden;
+    }
+
+    #slideshow img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1s ease-in-out;
+    }
+
+    p {
+      font-size: 18px;
+      margin-top: 30px;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TELA DE INÍCIO -->
+  <div id="start-screen">
+    <button id="start-btn">Start</button>
+  </div>
+
+  <!-- CONTAINER PRINCIPAL -->
+  <div id="slideshow-container">
+    <h1 id="song-title">Nuts</h1>
+    <img id="cover" src="assets/capa.jpeg" alt="Capa da música">
+
+    <audio id="music" controls>
+      <source src="assets/nuts.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="slideshow">
+      <img id="slide-image" src="assets/kaneki1.png" alt="">
+    </div>
+
+    <p id="description">Eu te amo.</p>
+  </div>
+
+  <script>
+    // Botão Start: inicia a música e exibe o conteúdo principal
+    document.getElementById("start-btn").addEventListener("click", function() {
+      document.getElementById("start-screen").style.display = "none";
+      document.getElementById("slideshow-container").style.display = "flex";
+      document.getElementById("music").play();
+    });
+
+    // Slideshow
+    const images = ["assets/kaneki1.png", "assets/kaneki2.png", "assets/kaneki3.jpg"];
+    let index = 0;
+    const slideImage = document.getElementById("slide-image");
+
+    function changeSlide() {
+      slideImage.style.opacity = 0;
+      setTimeout(() => {
+        index = (index + 1) % images.length;
+        slideImage.src = images[index];
+        slideImage.style.opacity = 1;
+      }, 1000);
+    }
+
+    setInterval(changeSlide, 3000);
+  </script>
+</body>
+</html>

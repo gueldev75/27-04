@@ -1,0 +1,38 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+#start-screen {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#start-btn {
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+#slideshow-container {
+    margin-top: 20px;
+}
+
+#slideshow img {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+}
