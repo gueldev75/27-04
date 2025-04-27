@@ -141,7 +141,9 @@
       <img id="slide-image" src="assets/kaneki1.png" alt="">
     </div>
 
-    <p id="description">Eu te amo.</p>
+    <p id="description">Eu te amo, meu amor.
+      Não quero nunca mais me distanciar de você outra vez, quero viver com você para sempre, sendo em vida ou sendo após a morte.
+    </p>
   </div>
 
   <script>
@@ -150,10 +152,12 @@
       document.getElementById("start-screen").style.display = "none";
       document.getElementById("slideshow-container").style.display = "flex";
       document.getElementById("music").play();
+      let audio = document.getElementById("(music)");
+audio.play();
     });
 
     // Slideshow
-    const images = ["assets/kaneki1.png", "assets/kaneki2.png", "assets/kaneki3.jpg"];
+    const images = ["assets/kaneki1.png", "assets/kaneki2.png", "assets/kaneki3.png"];
     let index = 0;
     const slideImage = document.getElementById("slide-image");
 
